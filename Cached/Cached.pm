@@ -4,7 +4,7 @@ use warnings;
 use vars qw($VERSION @ISA);
 use Tie::RDBM;
 use Carp;
-$VERSION = '0.02';
+$VERSION = '0.03';
 @ISA = qw(Tie::RDBM);
 
 sub TIEHASH {
@@ -47,11 +47,10 @@ sub STORE {
 
 sub EXISTS {
     my($self,$key) = @_;
-    #if( $self->{'cache_size'} > 0) {
-        if($self->{'cache'}->{$key}) {
-            return;
-        } 
-    #}
+    if($self->{'cache'}->{$key}) {
+        # We must return a true value
+        return 1;
+    } 
     return $self->SUPER::EXISTS($key);
 }
 

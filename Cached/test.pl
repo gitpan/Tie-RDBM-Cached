@@ -43,14 +43,14 @@ print "ok 1\n";
 my %h;
 test 2,tie %h,'Tie::RDBM::Cached',$dsn,{
                                  create       =>1,
-                                 drop         =>1,
+                                 drop         =>0,
                                  table        =>'PData',
                                  'warn'       =>0,
                                  user         =>USER,
                                  password     =>PASS,
                                  cache_size   =>10,
                                  cache_type   =>'HASH',
-                                 autocommit   =>0
+                                 autocommit   =>1
                                 };
 %h=();
 test 3,!scalar(keys %h);
